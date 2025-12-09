@@ -37,33 +37,6 @@ This project details the creation of a reliable water tank level sensor using an
 | **Trig** (Pin 3) | **D1** | **GPIO5** | Trigger Pulse Input |
 | **Echo** (Pin 2) | **D2** | **GPIO4** | Echo Signal Output (Connect via Voltage Divider) |
 
-graph TD
-    %% Nodes
-    Wemos[Wemos D1 Mini<br/>(ESP8266)]
-    Sensor[JSN-SR04T<br/>Ultrasonic Sensor]
-    R1[Resistor R1<br/>1k Ohm]
-    R2[Resistor R2<br/>2k Ohm]
-    GND[Ground (GND)]
-
-    %% Connections
-    Wemos -- "5V Pin" --> Sensor("VCC Pin")
-    Wemos -- "G Pin" --- GND
-    Sensor -- "GND Pin" --- GND
-    
-    Wemos -- "D1 (GPIO5)" --> Sensor("Trig Pin")
-    
-    %% Voltage Divider Section
-    Sensor -- "Echo Pin (5V Signal)" --> R1
-    R1 --> Wemos("D2 Pin (GPIO4)")
-    R1 --- R2
-    R2 --- GND
-
-    %% Styling for clarity
-    style Wemos fill:#f9f,stroke:#333,stroke-width:2px
-    style Sensor fill:#bbf,stroke:#333,stroke-width:2px
-    style R1 fill:#ff9,stroke:#f66,stroke-width:2px,stroke-dasharray: 5, 5
-    style R2 fill:#ff9,stroke:#f66,stroke-width:2px,stroke-dasharray: 5, 5
-
 ### **The Critical Voltage Divider**
 
 The voltage divider steps down the 5V Echo signal to a safe 3.3V level.
