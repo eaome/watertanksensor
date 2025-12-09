@@ -1,0 +1,62 @@
+esphome:
+  name: water-tank
+  friendly_name: Water Tank
+
+esp8266:
+  board: d1_mini
+
+# Enable logging
+logger:
+
+wifi:
+  ssid: "name"
+  password: "password"
+
+# Enable Home Assistant API and OTA updates
+api:
+ota:
+  platform: esphome
+
+# Web server to see logs
+web_server:
+  port: 80
+
+sensor:
+  - platform: ultrasonic
+    name: "Water Tank Raw Distance"
+    id: raw_water_distance
+    trigger_pin: D1
+    echo_pin: D2
+    update_interval: 15s
+    filters:
+      # This lambda filter discards any reading outside the 0.2m to 1.9m range
+      - lambda: |-
+          if (x < 0.2 || x > 1.9) {
+            return {}; // Discard this invalid reading
+          }
+          return x;    // This reading is valid, pass it on
+      # This median filter then smooths the *valid* readings
+      - median:
+          window_size: 5
+          send_every: 1
+          send_first_at: 1
+
+  # The template sensor 
+  - platform: template
+    name: "Water Tank Level Percent"
+    unit_of_measurement: "%"
+    icon: "mdi:water-percent"
+    lambda: |-
+      float dist_full = 0.3;
+      float dist_empty = 1.8;
+
+      float current_dist = id(raw_water_distance).state;
+      if (current_dist <= dist_full) {
+        return 100.0;
+      }
+      if (current_dist >= dist_empty) {
+        return 0.0;
+      }
+      float percentage = ((dist_empty - current_dist) / (dist_empty - dist_full)) * 100.0;
+      return percentage;
+    update_interval: 15s
