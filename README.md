@@ -76,7 +76,7 @@ A template sensor calculates the final water level percentage based on your tank
 * `dist_full`: **$0.3$ meters** (Distance from sensor to the water surface when the tank is full).
 
 The formula used:
-$$\text{Percentage} = \frac{(\text{dist\_empty} - \text{Current Distance})}{(\text{dist\_empty} - \text{dist\_full})} \times 100$$
+$$\text{Percentage} = \frac{(\text{dist-empty} - \text{Current Distance})}{(\text{dist-empty} - \text{dist-full})} \times 100$$
 
 ---
 
