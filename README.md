@@ -86,7 +86,7 @@ $$\text{Percentage} = \frac{(\text{dist-empty} - \text{Current Distance})}{(\tex
 | :--- | :--- |
 | [`water-tank.yaml`](water-tank.yaml) | The complete ESPHome configuration code. |
 | [`tank_sonar-holder v5.stl`](tank_sonar-holder%20v5.stl) | STL file for 3D printing the sensor mounting bracket. |
-| `images/physical-build.jpg` | Photo of the final assembled unit. |
+| [`IMG_5393.jpeg`](IMG_5393.jpeg) | Photo of the final assembled unit. |
 | `images/home-assistant-card.png` | Screenshot of the final result in Home Assistant. |
 
 
